@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import './node_modules/dayjs';
 
@@ -6,40 +6,32 @@ var dayjs = require('dayjs')
 //import dayjs from 'dayjs' // ES 2015
 dayjs().format()
 
+const weekday = require("dayjs/plugin/weekday");
+const weekOfYear = require("dayjs/plugin/weekOfYear");
+
+dayjs.extend(weekday);
+dayjs.extend(weekOfYear);
+
 
 const App = () => {
-    // Initialize state
-    const [ projects, setProjects ] = useState([]);
-
-    // Get projects
-    useEffect(() => {
-      fetch('/api/projects')
-            .then(res => res.json())
-            .then(projects => setProjects(projects));
-    },[]);
-
+    
     return (
         <div className="App">
+            
+            <div class="calendar-month" />
+                
+                <section class="calendar-month-header"/>
+                <div id="selected-month" class="calendar-month-header-selected-month" />
+                    <div class="calendar-month-header-selectors"/>
+                        <span id="previous-month-selector" >{'<'}</span>
+                        <span id="present-month-selector">{'>'}</span>
+                        <span id="next-month-selector">{'<'}</span>
+        
+                <ul id="days-of-week"class="day-of-week" />
+                <ul id="calendar-days" class="days-grid" />
 
-            <h1>Hi, my name is [YOUR NAME]</h1>
-            <h3>I'm a developer</h3>
+            <h1>Meal planner</h1>
 
-            <h4>Here are a few of my projects</h4>
-
-            {
-                projects.length ? (
-                    projects.map((project) => (
-                        <div style={{padding: 10}} key={project.name}>
-                            <p><b><a href={project.html_url}>{project.name}</a></b></p>
-                            <p>{project.description}</p>
-                        </div>
-                    ))
-                ) : (
-                    <div>
-                        Loading projects..
-                    </div>
-                )
-            }
         </div>
     );
 }
