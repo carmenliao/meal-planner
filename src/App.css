@@ -1,3 +1,8 @@
+
+h1 {
+  text-align: center;
+}
+  
 body {
   --grey-100: #e4e9f0;
   --grey-200: #cfd7e3;
@@ -6,6 +11,7 @@ body {
   --grid-gap: 1px;
   --day-label-size: 20px;
 }
+
 
 .calendar-month {
   position: relative;
@@ -58,7 +64,7 @@ body {
 
 .day-of-week > * {
   /* Position the weekday label within the cell */
-  text-align: right;
+  text-align: center;
   padding-right: 5px;
 }
 
